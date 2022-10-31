@@ -3,17 +3,43 @@ package com.application.model;
 import java.util.*;
 
 public class Activity {
-    private ArrayList<String> activityList;
+    private String firstName;
+    private String lastName;
+    private String[] activity;
 
-    Activity() {
-        activityList = new ArrayList<String>();
+    public Activity(){
+        this.firstName = "";
+        this.lastName = "";
+        this.activity = new String[]{};
     }
 
-    public void setActivityList(ArrayList<String> activityList) {
-        this.activityList = activityList;
+    public Activity(String firstName, String lastName, String[] activity) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.activity = activity;
     }
 
-    public ArrayList<String> getActivityList() {
-        return this.activityList;
+    public String getFirstName() {
+        return firstName;
+    }
+
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
+
+    public String getLastName() {
+        return lastName;
+    }
+
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
+    }
+
+    public String[] getActivity() {
+        return activity;
+    }
+
+    public void setActivity(String[] activity) {
+        this.activity = activity;
     }
 }

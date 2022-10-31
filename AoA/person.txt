@@ -1,0 +1,16 @@
+Javian, Cummings, 8768042159, javian@gmail.com, Hope Field, UTech, Patty Shop, true
+Shanique, Miller, 8767748932, shan@gmail.com, Hope Field, UTech, Social Worker, false
+Jazmin, Hayles, 8769876321, jazhay@yahoo.com, Meadowbrook, UTech, None, false
+Lucy, Liu, 8763135001, lucyL@outlook.com, Greater Portmore, UWI, KFC, false
+Damion, Wallis, 8762773131, dWillis@gmail.com, Hope Field, UTech, Social Worker, false
+Louis, Dam, 8767700032, louis77dam@gmail.com, Meadowbrook, UWI, Patty Shop, false
+Amanda-Ann, Grove, 8763311932, amandaAG1@gmail.com, Greater Portmore, UWI, KFC, true
+Kacy, Miller, 8765748131, kMill2002@gmail.com, Hope Field, UTech, Patty Shop, false
+Rachel, Edwards, 8767568374, Edwards@gmail.com, Greater Portmore, MCU, Dave, true
+Lisa, Hannah, 8762334507, lisaHannah89@outlook.com, Norbrook, UCC, Palace Amusement, false
+North, West, 8765118931, NW2015@gmail.com, Meadowbrook, UWI, Ramona, false
+Dwayne, Sloan, 8763312345, dw4yn3$loaN@gmail.com, Greater Portmore, UWI, Social Worker, false
+Kyle, Thompson, 8762883999, kThompson12@yahoo.com, Meadowbrook, UTech, Patty Shop, false
+Joel, Grant, 8765661234, JoelRTGrant@gmail.com, Hope Field, UTech, KFC, false
+
+

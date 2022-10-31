@@ -1,8 +1,6 @@
 package com.application.model;
 
-import java.io.BufferedReader;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
+import java.io.*;
 import java.util.*;
 
 public class Person {
@@ -14,8 +12,9 @@ public class Person {
     private String school;
     private String employer;
     private boolean privacy;
-    private Activity activityList;
+//    private Activity activityList;
 
+    //Default Constructor
     public Person(){
         this.firstName = null;
         this.lastName = null;
@@ -27,6 +26,7 @@ public class Person {
         this.privacy = true;
     }
 
+    //Primary Constructor
     public Person(String firstName, String lastName, String telephone, String email, String community, String school, String employer, boolean privacy) {
         this.firstName = firstName;
         this.lastName = lastName;
@@ -102,9 +102,9 @@ public class Person {
         this.privacy = privacy;
     }
 
-    public void addActivity(String activity) {
-        activityList.add(activity);
-    }
+//    public void addActivity(String activity) {
+//        activityList.add(activity);
+//    }
 
     @Override
     public String toString() {
@@ -118,14 +118,83 @@ public class Person {
                 "Privacy: " + privacy;
     }
 
-    public void writeToPersonFile() throws FileNotFoundException {
-        List<String> lines = new ArrayList<String>();
-        BufferedReader br = new BufferedReader(new FileReader("fileName"));
-        String line = br.readLine();
-        while (line != null)
-        {
-            lines.add(line);
-            line = br.readLine();
-        }
+
+    public static void checkLine() {
+
     }
+
+//    public void createFile(ArrayList<Person> personList) {
+//        try {
+//            BufferedWriter writer = new BufferedWriter(new FileWriter(new File("../person-book/AoA/person.txt")));
+//            writer.write(String.valueOf(personList));
+//            writer.close();
+//        } catch (IOException e) {
+//            throw new RuntimeException(e);
+//        }
+//    }
+//
+    public static void readFromPersonFile() throws IOException {
+        ArrayList<String> lines = new ArrayList<>();
+
+        BufferedReader file1 = null;
+        BufferedReader file2 = null;
+        int checkLine = 1;
+
+        try {
+            file1 = new BufferedReader(new FileReader("../person-book/AoA/person.txt"));
+            file2 = new BufferedReader(new FileReader("../person-book/AoA/activity.txt"));
+
+            String val = file1.readLine();
+            String check = file2.readLine();
+
+            boolean areEqual = true;
+
+            while (val != null || check != null) {
+                if(val == null || check == null) {
+                    areEqual = false;
+
+                    break;
+                }
+                else if(!val.equalsIgnoreCase(check)) {
+                    areEqual = false;
+                    break;
+                }
+
+                val = file1.readLine();
+                check = file2.readLine();
+                checkLine++;
+            }
+
+            if(areEqual) {
+                System.out.println("Two files have same content.");
+            }
+            else {
+                System.out.println("Two files have different content. They differ at line "+checkLine);
+
+                System.out.println("File1 has "+val+" and File2 has "+check+" at line "+checkLine);
+            }
+
+//            file1.close();
+//
+//            file2.close();
+
+//            while (line != null) {
+//
+//                lines.add(line);
+//                line = br.readLine();
+//            }
+        } catch (FileNotFoundException ex) {
+            ex.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }finally {
+            assert file1 != null;
+            assert file2 != null;
+            file1.close();
+            file2.close();
+        }
+
+    }
+
+
 }
