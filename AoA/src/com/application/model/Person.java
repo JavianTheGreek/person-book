@@ -11,7 +11,7 @@ public class Person {
     private String community;
     private String school;
     private String employer;
-    private boolean privacy;
+    private char privacy;
 //    private Activity activityList;
 
     //Default Constructor
@@ -23,11 +23,11 @@ public class Person {
         this.community = null;
         this.school = null;
         this.employer = null;
-        this.privacy = true;
+        this.privacy = 'N';
     }
 
     //Primary Constructor
-    public Person(String firstName, String lastName, String telephone, String email, String community, String school, String employer, boolean privacy) {
+    public Person(String firstName, String lastName, String telephone, String email, String community, String school, String employer, char privacy) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.telephone = telephone;
@@ -94,11 +94,11 @@ public class Person {
         this.employer = employer;
     }
 
-    public boolean isPrivacy() {
+    public char isPrivacy() {
         return privacy;
     }
 
-    public void setPrivacy(boolean privacy) {
+    public void setPrivacy(char privacy) {
         this.privacy = privacy;
     }
 

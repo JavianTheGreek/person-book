@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 public class PersonTree {
     static class Node {
+        private Node root;
         private Node leftSubTree;
         private Node rightSubTree;
         Person data;
@@ -38,30 +39,55 @@ public class PersonTree {
         }
     }
 
+    //My original idea is to check the size of the person list and calculate the distance
+    //So I would do a random gen to populate the tree with different person
+    //but imma run a test statement to see if that person is already added to the tree
+    //that's just my idea stills
+
+    public int calculateDegreeOfSeparation(Node node, ArrayList<Person> personList){
+        int position = 0;
+        if (node.isEmpty()){
+            return 0;
+        }else {
+            position = calculateLinePosition(node.leftSubTree, personList) + calculateLinePosition(node.rightSubTree, personList) + 1;
+            return position;
+        }
+    }
+
+    private int calculateLinePosition(Node leftSubTree, ArrayList<Person> personList) {
+        left.person
+                right.left.person
+    }
+
+
+
+
     /*public void insert(Node node, Person person) {
         //left subtree == nothing in common
         //right subtree == one or more things in common
-        if (getCountCommon(person) == 0) {
-            if (node.left != null) {
-                insert(node.left, value);
-            } else {
-                System.out.println(" Inserted " + value + " to left of " + node.value);
-                node.left = new Node(value); }
-        } else if (value > node.value) {
-            if (node.right != null) {
-                insert(node.right, value);
-            } else {
-                System.out.println("  Inserted " + value + " to right of "
-                        + node.value);
-                node.right = new Node(value);
-            }
-        }
+//        if (getCountCommon(person) == 0) {
+//            if (node.left != null) {
+//                insert(node.left, value);
+//            } else {
+//                System.out.println(" Inserted " + value + " to left of " + node.value);
+//                node.left = new Node(value); }
+//        } else if (value > node.value) {
+//            if (node.right != null) {
+//                insert(node.right, value);
+//            } else {
+//                System.out.println("  Inserted " + value + " to right of "
+//                        + node.value);
+//                node.right = new Node(value);
+//            }
+//        }
     }*/
 
     public void insertPerson(Node node, Person data){
         int person = 0;
-
-        if(data.getFirstName().equals()){
+        //So for when the tree check the root which is the name
+        //it will increment by 1, so for eg data + 1 and then move to the next node
+        // to check the distance of the specific selected node from the tree
+        if(node.root.isFull()){
             if(node.leftSubTree.isFull()){
                 insertPerson(node.leftSubTree, data);
             }else {
@@ -118,3 +144,16 @@ public class PersonTree {
     }*/
 
 }
+//        if(data.getFirstName() == node.size){
+//            if(node.leftSubTree.isFull()){
+//                insertPerson(node.leftSubTree, data);
+//            }else {
+//                System.out.println(" Inserted " + data + " to left of " + node.data.getFirstName());
+//            }
+//        }else if(){
+//            if(){
+//
+//            }else {
+//
+//            }
+//        }
