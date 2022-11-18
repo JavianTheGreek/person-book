@@ -1,6 +1,8 @@
 package com.application.model;
 
 import java.io.*;
+import java.nio.file.Files;
+import java.nio.file.Path;
 import java.util.*;
 
 public class Person {
@@ -12,22 +14,26 @@ public class Person {
     private String school;
     private String employer;
     private char privacy;
-//    private Activity activityList;
+    private String activity;
+
+    public static Random rand = new Random();
+
 
     //Default Constructor
     public Person(){
-        this.firstName = null;
-        this.lastName = null;
-        this.telephone = null;
-        this.email = null;
-        this.community = null;
-        this.school = null;
-        this.employer = null;
+        this.firstName = "";
+        this.lastName = "";
+        this.telephone = "";
+        this.email = "";
+        this.community = "";
+        this.school = "";
+        this.employer = "";
         this.privacy = 'N';
+        this.activity = "";
     }
 
     //Primary Constructor
-    public Person(String firstName, String lastName, String telephone, String email, String community, String school, String employer, char privacy) {
+    public Person(String firstName, String lastName, String telephone, String email, String community, String school, String employer, char privacy, String activity) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.telephone = telephone;
@@ -36,6 +42,20 @@ public class Person {
         this.school = school;
         this.employer = employer;
         this.privacy = privacy;
+        this.activity = activity;
+    }
+
+    //Copy Constructor
+    public Person(Person obj) {
+        this.firstName = obj.firstName;
+        this.lastName = obj.lastName;
+        this.telephone = obj.telephone;
+        this.email = obj.email;
+        this.community = obj.community;
+        this.school = obj.school;
+        this.employer = obj.employer;
+        this.privacy = obj.privacy;
+        this.activity = obj.activity;
     }
 
     public String getFirstName() {
@@ -94,7 +114,7 @@ public class Person {
         this.employer = employer;
     }
 
-    public char isPrivacy() {
+    public char getPrivacy() {
         return privacy;
     }
 
@@ -102,99 +122,79 @@ public class Person {
         this.privacy = privacy;
     }
 
-//    public void addActivity(String activity) {
-//        activityList.add(activity);
-//    }
+    public String getActivity() {
+        return activity;
+    }
+
+    public void setActivity(String activity) {
+        this.activity = activity;
+    }
 
     @Override
     public String toString() {
         return "First Name: " + firstName +
-                "Last Name: " + lastName +
+                " <*> Last Name: " + lastName +
                 "\nTelephone: " + telephone +
-                "Email: " + email +
+                " <*> Email: " + email +
                 "\nCommunity: " + community +
-                "School: " + school +
+                " <*> School: " + school +
                 "\nEmployer='" + employer +
-                "Privacy: " + privacy;
+                " <*> Privacy: " + privacy +
+                "\n ---Activity/Activities--- \n"
+                + activity + "\n";
     }
 
-
-    public static void checkLine() {
-
-    }
-
-//    public void createFile(ArrayList<Person> personList) {
-//        try {
-//            BufferedWriter writer = new BufferedWriter(new FileWriter(new File("../person-book/AoA/person.txt")));
-//            writer.write(String.valueOf(personList));
-//            writer.close();
-//        } catch (IOException e) {
-//            throw new RuntimeException(e);
-//        }
-//    }
-//
-    public static void readFromPersonFile() throws IOException {
-        ArrayList<String> lines = new ArrayList<>();
-
-        BufferedReader file1 = null;
-        BufferedReader file2 = null;
-        int checkLine = 1;
-
+    public static void readFromFiles(ArrayList<Person> personList) throws IOException {
+//String fileConcat = "../person-book-main/AoA/";
         try {
-            file1 = new BufferedReader(new FileReader("../person-book/AoA/person.txt"));
-            file2 = new BufferedReader(new FileReader("../person-book/AoA/activity.txt"));
+            String file1 = "SamplefilePersons2022Oct31text.csv";
+            String file2 = "SamplefileActivities2022Oct31text.csv";
+            Scanner reader = new Scanner(new File(file1));
+            reader.useDelimiter(",|\n");
+            List<String> lines = Files.readAllLines(Path.of(file2));
 
-            String val = file1.readLine();
-            String check = file2.readLine();
+            System.out.println("Populating objects with data from person file...");
 
-            boolean areEqual = true;
+            while (reader.hasNext()) {
+                Person person = new Person();
 
-            while (val != null || check != null) {
-                if(val == null || check == null) {
-                    areEqual = false;
+                person.setFirstName(reader.next());
+                String firstName = person.firstName;
+                person.setLastName(reader.next());
+                String lastName = person.lastName;
+                person.setTelephone(reader.next());
+                person.setEmail(reader.next());
+                person.setCommunity(reader.next());
+                person.setSchool(reader.next());
+                person.setEmployer(reader.next());
+                person.setPrivacy(reader.next().charAt(0));
 
+                String activityForObj = "";
+                for (String line : lines) {
+                    if (line.contains(firstName) && line.contains(lastName)) {
+                        String[] activityFromFile = line.split(",");
+                        activityForObj = activityForObj + activityFromFile[2] + "\n";
+                        person.setActivity(activityForObj);
+                    }
+                }
+
+                personList.add(person);
+
+                if(!reader.hasNextLine())
+                {
                     break;
                 }
-                else if(!val.equalsIgnoreCase(check)) {
-                    areEqual = false;
-                    break;
-                }
-
-                val = file1.readLine();
-                check = file2.readLine();
-                checkLine++;
             }
 
-            if(areEqual) {
-                System.out.println("Two files have same content.");
-            }
-            else {
-                System.out.println("Two files have different content. They differ at line "+checkLine);
+            System.out.println("List has been populated.");
+            reader.close();
 
-                System.out.println("File1 has "+val+" and File2 has "+check+" at line "+checkLine);
-            }
-
-//            file1.close();
-//
-//            file2.close();
-
-//            while (line != null) {
-//
-//                lines.add(line);
-//                line = br.readLine();
-//            }
         } catch (FileNotFoundException ex) {
             ex.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }finally {
-            assert file1 != null;
-            assert file2 != null;
-            file1.close();
-            file2.close();
         }
 
+//return personList;
     }
 
-
 }
+
