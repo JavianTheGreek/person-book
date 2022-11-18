@@ -49,6 +49,9 @@ public class App {
 //        System.out.println(personList.get(19333).getFirstName() + " " + personList.get(19333).getLastName() +
 //                " and " + personList.get(5757).getFirstName() + " " + personList.get(5757).getLastName() + "...");
 //        System.out.println(personTree.getCountCommon(personList.get(19333), personList.get(5757)));
+          System.out.println("\nMaking recommendations...");
+          personTree.getRec(personList);
+
 
 
 //        System.out.println("\nSearching tree for '" + personList.get(1).getFirstName() + " " + personList.get(1).getLastName() + "'...");
