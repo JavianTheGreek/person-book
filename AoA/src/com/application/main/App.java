@@ -49,7 +49,8 @@ public class App {
 //        System.out.println(personList.get(19333).getFirstName() + " " + personList.get(19333).getLastName() +
 //                " and " + personList.get(5757).getFirstName() + " " + personList.get(5757).getLastName() + "...");
 //        System.out.println(personTree.getCountCommon(personList.get(19333), personList.get(5757)));
-
+//        System.out.println("\nMaking recommendations...");
+//        personTree.getRec(personList);
 
 //        System.out.println("\nSearching tree for '" + personList.get(1).getFirstName() + " " + personList.get(1).getLastName() + "'...");
 //        personTree.searchData(personList.get(1));
@@ -91,6 +92,7 @@ public class App {
         int size = personList.size();
 
 
+
         while(true){
            try{
                System.out.println("Enter any key to continue (exit to end the program)");
@@ -100,25 +102,34 @@ public class App {
 
                    for(int k=0; k<result; k++){
                            // used for generating the index of two random person from the list.
-//                            int getPosition = (int) (Math.random() * personList.size());
-//                            System.out.println(personList.get(getPosition + i));
+                            int getPosition = (int) (Math.random() * personList.size());
+                            System.out.println("\nSelecting Random persons from the list "+ getPosition + ": " + personList.get(getPosition).getFirstName() + " " + personList.get(getPosition).getLastName());
 
-
-                       for(int i=0; i<size; i++){
+                            if(k == 1){
+                                for(int i=0; i<result; i++){
 
 //                           System.out.println(personTree.get(result + k).getFirstName()+ " " + personList.get(result + k).getLastName() );
-//                           System.out.println("\t-+-Enter Names of the Persons in the file-+-");
-//                           System.out.println("Enter First Name: ");
-//                           FirstName = in.next();
-//                           System.out.println("Enter Last Name: ");
-//                           LastName = in.next();
-//
-//                            if(personList.get(i).getFirstName().contains(FirstName) && personList.get(i).getLastName().contains(LastName)){
-//                                System.out.println("\nThe degrees of separation between "+ personList.get(i).getFirstName() + " " + personList.get(i).getLastName() + " and " + personList.get(i).getFirstName() + " " + personList.get(i).getLastName());
-//                            }
-                        }
-                   }
+                                    System.out.println("\n\t-+-Enter Names of the Persons in the file-+-");
+                                    System.out.println("Enter First Name: ");
+                                    FirstName = in.next();
+                                    System.out.println("Enter Last Name: ");
+                                    LastName = in.next();
 
+
+
+//                           personTree.insertNode();
+
+//                           PersonTree.findDistanceBetweenLines(personTree, FirstName, LastName);
+//
+//                           personTree.inorderTraversal(personTree.getRoot());
+
+
+                                }
+                                System.out.println("\nThe degrees of separation between " + personList.get(k).getFirstName() + " " + personList.get(k).getLastName() + " and " + personList.get(k).getFirstName() + " " + personList.get(k).getLastName());
+                                if (personList.get(k).getFirstName().contains(FirstName) && personList.get(k).getLastName().contains(LastName)) {
+                                }
+                            }
+                   }
                } else {
                    System.exit(0);
                }
@@ -126,17 +137,6 @@ public class App {
                e.printStackTrace();
            }
         }
-    }
-
-
-
-    private static int genRecommendation(int common) {
-        int result = 0;
-        for (int i = 0; i <= 2; i++) {
-            result = rand.nextInt(common);
-            result = rand.nextInt(21000);
-        }
-        return result;
     }
 }
 

@@ -90,9 +90,7 @@ public class PersonTree {
         if(leftSubTree == null && rightSubTree == null){
             return null;
         }
-
         return leftSubTree == null ? rightSubTree : leftSubTree;
-
     }
 
     private static int findDistanceBetween(Node root, Node node1, int distance){
@@ -281,7 +279,7 @@ public class PersonTree {
     {
         inorderTraversal(root);
     }
-    private void inorderTraversal(Node head)
+    public void inorderTraversal(Node head)
     {
         if (head != null)
         {
@@ -319,6 +317,27 @@ public class PersonTree {
             postorderTraversal(head.leftSubTree);
             postorderTraversal(head.rightSubTree);
             System.out.print(head.root+" ");
+        }
+    }
+
+    public void getRec(ArrayList<Person> person) {
+        int listSize = person.size();
+        ArrayList<Person> cc = new ArrayList<>();;
+        String recommendations = "";
+        int index = 0;
+
+        for(int i=0;i<listSize;i++){
+            for(int j=0;j<listSize;j++) {
+                if (person.get(i) != person.get(j)) {
+                    if (getCountCommon(person.get(i), person.get(j)) > 0) {
+                        if(person.get(j).getActivity() != "") {
+                            recommendations = recommendations + person.get(j).getActivity();
+                        }
+                    }
+                }
+            }
+            System.out.println(person.get(i).getFirstName() + ", here are some things your close contacts are interested in. You might be too: \n"
+                    + recommendations);
         }
     }
 
