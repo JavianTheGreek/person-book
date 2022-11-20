@@ -5,7 +5,8 @@ import java.util.ArrayList;
 public class PersonTree {
     private Node root;
 
-    static class Node {
+    public static class Node {
+        public ArrayList<Person> data;
         private Person root;
         private Node leftSubTree;
         private Node rightSubTree;
@@ -73,53 +74,6 @@ public class PersonTree {
         }
     }
 
-    private static Node findLCA(Node root, Node node1, Node node2){
-        if(root == null){
-            return null;
-        }else if(root == node1 || root == node2){
-            return root;
-        }
-
-        Node leftSubTree = findLCA(root.getLeftSubTree(), node1, node2);
-
-        Node rightSubTree = findLCA(root.getRightSubTree(), node1, node2);
-
-        if(leftSubTree != null && rightSubTree != null){
-            return root;
-        }
-        if(leftSubTree == null && rightSubTree == null){
-            return null;
-        }
-        return leftSubTree == null ? rightSubTree : leftSubTree;
-    }
-
-    private static int findDistanceBetween(Node root, Node node1, int distance){
-        if(root.isEmpty()){
-            return -1;
-        }
-        if(root == node1){
-            return distance;
-        }
-
-        int d = findDistanceBetween(root.getLeftSubTree(), node1, distance + 1);
-
-        if(d != -1){
-            return d;
-        }
-        d = findDistanceBetween(root.getRightSubTree(), node1, distance + 1);
-
-        return d;
-    }
-
-    public static int findDistanceBetweenLines(Node root, Node node1, Node node2){
-        Node lca = findLCA(root, node1, node2);
-        int d1 = findDistanceBetween(lca, node1, 0);
-        int d2 = findDistanceBetween(lca, node1, 0);
-        System.out.println(d1+d2);
-
-        return d1+d2;
-    }
-
     public PersonTree(){
         root = null;
     }
@@ -158,6 +112,7 @@ public class PersonTree {
     private int getMaxHeight(int leftNodeHeight, int rightNodeHeight)
     {
         return leftNodeHeight > rightNodeHeight ? leftNodeHeight : rightNodeHeight;
+//        return Math.max(leftNodeHeight, rightNodeHeight);
     }
 
     private Node insertNode(Person data, Node root)
@@ -296,12 +251,17 @@ public class PersonTree {
     }
     private void preorderTraversal(Node head)
     {
+//        Person people = new ArrayList<>();
         if (head != null)
         {
             System.out.print(head.root+" ");
             preorderTraversal(head.leftSubTree);
             preorderTraversal(head.rightSubTree);
         }
+
+//        preorderTraversal(insertNode(people));
+
+//        postorderTraversal(new Node(insertNode(people).leftSubTree));
     }
 
     // create postorderTraversal() method for traversing AVL Tree in post-order form
@@ -351,8 +311,8 @@ public class PersonTree {
         }
     }
     private int calculateLinePosition(Node leftSubTree, ArrayList<Person> personList) {
-        //left.person
-        // right.left.person
+//        leftSubTree.
+//        right.left.person
         return 1;
     }
 

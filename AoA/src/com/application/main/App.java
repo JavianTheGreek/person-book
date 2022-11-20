@@ -24,6 +24,8 @@ public class App {
         for (int index=0; index<size; index++){
 
             personTree.insertNode(personList.get(index));
+            PersonTree a = new PersonTree();
+
         }
 
         System.out.println("Tree populated.");
@@ -85,51 +87,53 @@ public class App {
     }
 
     public static void degreeOfSeparation() throws IOException {
-        int result = 2, cnt=0;
-        String val = "";
-        String FirstName = "";
-        String LastName = "";
+        int result = 2, cnt=0, k=0;
+        String input = "";
+        String FirstName1 = "";
+        String LastName1 = "";
+        String FirstName2 = "";
+        String LastName2 = "";
         int size = personList.size();
 
 
 
         while(true){
            try{
-               System.out.println("Enter any key to continue (exit to end the program)");
-               val = in.next();
+               System.out.println("\nEnter any key to continue (exit to end the program)");
+               input = in.next();
 
-               if(!val.equals("exit")) {
+               if(!input.equals("exit")) {
+                   while (k < result){
+                        // used for generating the index of two random person from the list.
+                       int getPosition = (int) (Math.random() * personList.size());
+                       System.out.println("\nSelecting Random persons from the list "+ getPosition + ": " + personList.get(getPosition).getFirstName() + " " + personList.get(getPosition).getLastName());
 
-                   for(int k=0; k<result; k++){
-                           // used for generating the index of two random person from the list.
-                            int getPosition = (int) (Math.random() * personList.size());
-                            System.out.println("\nSelecting Random persons from the list "+ getPosition + ": " + personList.get(getPosition).getFirstName() + " " + personList.get(getPosition).getLastName());
-
-                            if(k == 1){
-                                for(int i=0; i<result; i++){
-
-//                           System.out.println(personTree.get(result + k).getFirstName()+ " " + personList.get(result + k).getLastName() );
-                                    System.out.println("\n\t-+-Enter Names of the Persons in the file-+-");
-                                    System.out.println("Enter First Name: ");
-                                    FirstName = in.next();
-                                    System.out.println("Enter Last Name: ");
-                                    LastName = in.next();
-
-
-
-//                           personTree.insertNode();
-
-//                           PersonTree.findDistanceBetweenLines(personTree, FirstName, LastName);
-//
-//                           personTree.inorderTraversal(personTree.getRoot());
-
-
-                                }
-                                System.out.println("\nThe degrees of separation between " + personList.get(k).getFirstName() + " " + personList.get(k).getLastName() + " and " + personList.get(k).getFirstName() + " " + personList.get(k).getLastName());
-                                if (personList.get(k).getFirstName().contains(FirstName) && personList.get(k).getLastName().contains(LastName)) {
+                        if(k == 1){
+                            for(int i=1; i<result; i++){
+                                System.out.println("\n\t-+-Enter Names of the Persons in the file-+-");
+                                System.out.println("Enter Person Name " + i +": ");
+                                FirstName1 = in.next();
+                                LastName1 = in.next();
+                                System.out.println("Enter Person Name " + (i+1) +": ");
+                                FirstName2 = in.next();
+                                LastName2 = in.next();
+                                for (int j=0; j<personList.size(); j++){
+                                    if (personList.get(j).getFirstName().contains(FirstName1) && personList.get(j).getLastName().contains(LastName1) && personList.get(j).getFirstName().contains(FirstName2) && personList.get(j).getLastName().contains(LastName2)) {
+                                        System.out.println("\nThe degrees of separation between " + personList.get(j).getFirstName() + " " + personList.get(j).getLastName() + " and " + personList.get(j).getFirstName() + " " + personList.get(j).getLastName() + " is ");
+                                        break;
+                                    }
                                 }
                             }
+
+                        }
+                        k++;
                    }
+//                   for(int t=0; t < size; t++) {
+//                       if (personList.get(k).getFirstName().contains(FirstName) && personList.get(k).getLastName().contains(LastName)) {
+//                           System.out.println("\nThe degrees of separation between " + personList.get(t).getFirstName() + " " + personList.get(t).getLastName() + " and " + personList.get(t).getFirstName() + " " + personList.get(t).getLastName());
+//                       }
+//                   }
+
                } else {
                    System.exit(0);
                }
