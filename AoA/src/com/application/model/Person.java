@@ -3,7 +3,9 @@ package com.application.model;
 import java.io.*;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Scanner;
 
 public class Person {
     private String firstName;
@@ -14,22 +16,20 @@ public class Person {
     private String school;
     private String employer;
     private char privacy;
+
     private String activity;
-
-    public static Random rand = new Random();
-
 
     //Default Constructor
     public Person(){
-        this.firstName = "";
-        this.lastName = "";
-        this.telephone = "";
-        this.email = "";
-        this.community = "";
-        this.school = "";
-        this.employer = "";
-        this.privacy = 'N';
-        this.activity = "";
+        firstName = null;
+        lastName = null;
+        telephone = null;
+        email = null;
+        community = null;
+        school = null;
+        employer = null;
+        privacy = 'N';
+        activity = "";
     }
 
     //Primary Constructor
@@ -114,7 +114,7 @@ public class Person {
         this.employer = employer;
     }
 
-    public char getPrivacy() {
+    public char isPrivacy() {
         return privacy;
     }
 
@@ -129,26 +129,24 @@ public class Person {
     public void setActivity(String activity) {
         this.activity = activity;
     }
-
     @Override
     public String toString() {
-        return "First Name: " + firstName +
-                " <*> Last Name: " + lastName +
-                "\nTelephone: " + telephone +
-                " <*> Email: " + email +
-                "\nCommunity: " + community +
-                " <*> School: " + school +
-                "\nEmployer='" + employer +
-                " <*> Privacy: " + privacy +
-                "\n ---Activity/Activities--- \n"
-                + activity + "\n";
+        return  "First Name:    " + firstName +
+                "\nLast Name:   " + lastName +
+                "\nTelephone:   " + telephone +
+                "\nEmail:       " + email +
+                "\nCommunity:   " + community +
+                "\nSchool:      " + school +
+                "\nEmployer:    " + employer +
+                "\nPrivacy:     " + privacy +
+                "\n     ---Activity/Activities---    \n" + activity +
+                "\n";
     }
 
     public static void readFromFiles(ArrayList<Person> personList) throws IOException {
-//String fileConcat = "../person-book-main/AoA/";
         try {
-            String file1 = "SamplefilePersons2022Oct31text.csv";
-            String file2 = "SamplefileActivities2022Oct31text.csv";
+            String file1 = "../person-book-main/AoA/SamplefilePersons2022Oct31text.csv";
+            String file2 = "../person-book-main/AoA/SamplefileActivities2022Oct31text.csv";
             Scanner reader = new Scanner(new File(file1));
             reader.useDelimiter(",|\n");
             List<String> lines = Files.readAllLines(Path.of(file2));
@@ -173,7 +171,7 @@ public class Person {
                 for (String line : lines) {
                     if (line.contains(firstName) && line.contains(lastName)) {
                         String[] activityFromFile = line.split(",");
-                        activityForObj = activityForObj + activityFromFile[2] + "\n";
+                        activityForObj = activityForObj + activityFromFile[2] +  "\n";
                         person.setActivity(activityForObj);
                     }
                 }
@@ -192,9 +190,5 @@ public class Person {
         } catch (FileNotFoundException ex) {
             ex.printStackTrace();
         }
-
-//return personList;
     }
-
 }
-
