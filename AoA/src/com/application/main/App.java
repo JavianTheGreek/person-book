@@ -48,13 +48,15 @@ public class App {
         //Checking number of nodes in tree
         System.out.println("\nNumber of nodes in tree: " + personTree.getTotalNumberOfNodes(personTree.getRoot()) + "\n");
 
-        //Recommending to a person the activities of their close contact(s)
-        System.out.println("\nMaking recommendations to " + personList.get(6889).getFirstName() + " " + personList.get(6889).getLastName());
-        personTree.getRec(personList.get(6889));
-
         //Conducting a search for a given node in the tree
-        System.out.println("\nSearching tree for '" + personList.get(6889).getFirstName() + " " + personList.get(6889).getLastName() + "'...");
-        personTree.searchData(personList.get(6889));
+        System.out.println("\nSearching tree for '" + personList.get(9483).getFirstName() + " " + personList.get(9483).getLastName() + "'...");
+        personTree.searchData(personList.get(9483));
+
+        //Recommending to each person the activities of their close contact
+        for(int i=0; i < size; i++){
+            System.out.println("\nMaking recommendations to " + personList.get(i).getFirstName() + " " + personList.get(i).getLastName());
+            personTree.getRec(personList.get(i));
+        }
     }
 
 
