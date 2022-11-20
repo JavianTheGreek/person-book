@@ -79,8 +79,6 @@ public class PersonTree {
     }
 
     public Node searchData(Node node, Person data) {
-        //Node check = null;
-
         try {
             if (node == null) {
                 System.out.println(data.getFirstName() + " was not found.");
@@ -88,7 +86,7 @@ public class PersonTree {
 
             if (node.getRoot() == data) {
                 System.out.println(data.getFirstName() + " was found!");
-                System.out.println("Here is their information...\n" + node.getRoot());
+                //System.out.println("Here is their information...\n" + node.getRoot());
                 return node;
             } else {
                 if (getCountCommon(node.getRoot(), data) == 0) {
@@ -157,15 +155,20 @@ public class PersonTree {
             }
 
             if (node.getRoot().isPrivacy() == 'N') {
-                if (getCountCommon(node.getRoot(), node.getRightSubTree().getRoot()) > 0) {
-                    if (node.getRightSubTree().getRoot().getActivity() != "") {
-                        recommendations = recommendations + node.getRightSubTree().getRoot().getActivity();
-                        System.out.println(node.getRoot().getFirstName() +
-                                ", here are some things your close contacts are interested in. You might be too: \n" + recommendations);
-                    } else {
-                        System.out.println("Sorry. No recommendations are avaialble for you, " + node.getRoot().getFirstName() +
-                                ", because  your close contact has no activities listed.");
+                if (node.getRightSubTree() != null) {
+                    if (getCountCommon(node.getRoot(), node.getRightSubTree().getRoot()) > 0) {
+                        if (node.getRightSubTree().getRoot().getActivity() != "") {
+                            recommendations = recommendations + node.getRightSubTree().getRoot().getActivity();
+                            System.out.println(node.getRoot().getFirstName() +
+                                    ", here are some things your close contacts are interested in. You might be too: \n" + recommendations);
+                        } else {
+                            System.out.println("Sorry. No recommendations are avaialble for you, " + node.getRoot().getFirstName() +
+                                    ", because  your close contact has no activities listed.");
+                        }
                     }
+                } else {
+                    System.out.println(" We're sorry, " + node.getRoot().getFirstName() +
+                            ", but since you have no close contact, we cannot recommend activities to you.");
                 }
             } else if (node.getRoot().isPrivacy() == 'Y') {
                 System.out.println(node.getRoot().getFirstName() + " " + node.getRoot().getLastName()
@@ -195,4 +198,6 @@ public class PersonTree {
     }
 
 }
+
+
 
