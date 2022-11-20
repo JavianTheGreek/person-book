@@ -164,7 +164,7 @@ public class PersonTree {
                                 ", here are some things your close contacts are interested in. You might be too: \n" + recommendations);
                     } else {
                         System.out.println("Sorry. No recommendations are avaialble for you, " + node.getRoot().getFirstName() +
-                                " because  your close contact has no activities listed.");
+                                ", because  your close contact has no activities listed.");
                     }
                 }
             } else if (node.getRoot().isPrivacy() == 'Y') {
