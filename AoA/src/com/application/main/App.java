@@ -82,7 +82,7 @@ public class App {
 //            System.out.println("\nSelecting Random persons from the list "+ getPosition + ": " + personList.get(getPosition).getFirstName() + " " + personList.get(getPosition).getLastName());
 
         }
-        PersonTree.findDistance(personTree.getRoot(), personList.get(9483).getFirstName(), personList.get(9483).getLastName());
+//        PersonTree.findDistance(personTree.getRoot(), personList.get(9483).getFirstName(), personList.get(9483).getLastName());
 
 ////        System.out.println("""
 ////
