@@ -19,20 +19,25 @@ public class App {
 
     public static void main(String[] args) throws IOException {
 
+        //Populating ArrayList with records from person and activities files
         Person.readFromFiles(personList);
+
         size = personList.size();
         System.out.println("Size of list = " + size);
 
         System.out.println("\nChecking if tree is empty...");
         System.out.print(personTree.isEmpty() + "\n");
 
-        System.out.println("\nPopulating tree with data from personList...");
+        int size = personList.size();
 
-        for (Person person : personList){
+
+        //Populating tree with person records
+        System.out.println("\nPopulating tree with data from personList...");
+        for (Person person : personList) {
             personTree.insertNode(person);
         }
-
         System.out.println("Tree populated.");
+
 
         System.out.println("\nRoot node is: " + personTree.getRoot().getRoot().getFirstName() + " " + personTree.getRoot().getRoot().getLastName());
         System.out.println("Left of root node is: " + personTree.getRoot().getLeftSubTree().getRoot().getFirstName() + " "
@@ -54,12 +59,14 @@ public class App {
         System.out.println("\nConfirming that tree is no longer empty...");
         System.out.print(personTree.isEmpty() + "\n");
 
+
         //Checking number of nodes in tree
         System.out.println("\nNumber of nodes in tree: " + personTree.getTotalNumberOfNodes(personTree.getRoot()) + "\n");
 
         //Conducting a search for a given node in the tree
         System.out.println("\nSearching tree for '" + personList.get(9483).getFirstName() + " " + personList.get(9483).getLastName() + "'...");
         personTree.searchData(personList.get(9483));
+
 
 
         //trying to find the degreeOfSeparation attempt 1
@@ -170,5 +177,21 @@ public class App {
             }
         }
     }
+
+        //makeRecommendations(personTree, personList);
+
+//        System.out.print(findDistance(personTree.getRoot(), personList.get(8999), personList.get(17800)));
+
+
+    //Recommending to each person the activities of their close contact
+    public static void makeRecommendations(PersonTree personTree, ArrayList<Person> personList) {
+        int size = personList.size();
+
+        for (int i = 0; i < size; i++) {
+            System.out.println("\nMaking recommendations to " + personList.get(i).getFirstName() + " " + personList.get(i).getLastName());
+            personTree.getRec(personList.get(i));
+        }
+    }
+
 }
 
