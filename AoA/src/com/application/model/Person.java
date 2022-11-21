@@ -191,4 +191,90 @@ public class Person {
             ex.printStackTrace();
         }
     }
+
+    public static void userCreateFile(){
+        Scanner input = new Scanner(System.in);
+        System.out.print("Enter the filename you want to use for Person File.: ");
+        String fileName = input.nextLine();
+        fileName = fileName + ".csv";
+
+        System.out.print("Enter the filename you want to use for Activity File.: ");
+        String fileName2 = input.nextLine();
+        fileName2 = fileName2 + ".csv";
+
+        boolean isFileCreated1 = false;  // set isFileCreated to false.
+        boolean isFileCreated2 = false;  // set isFileCreated to false.
+        try {
+            File file = new File(fileName);
+            File file2 = new File(fileName2);
+            isFileCreated1 = file.createNewFile();
+            isFileCreated2 = file2.createNewFile();
+
+            if (file.createNewFile() && file2.createNewFile()) {
+                System.out.println("A file was created.");
+            } else {
+                System.out.println("The file is already there.");
+            }
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        } catch (NullPointerException ex){
+            ex.printStackTrace();
+        }
+        System.out.print("Was the file managed to make? -- ");
+        System.out.println(isFileCreated1);
+        System.out.println(isFileCreated2);
+        String fileLocator = "fileLocator -> " + fileName;
+        String fileLocator2 = "fileLocator -> " + fileName2;
+        System.out.println(fileLocator);
+        System.out.println(fileLocator2);
+
+
+    }
+
+    public static void readFromSelectedFiles(ArrayList<Person> personList, File file1, File file2) throws IOException {
+        try {
+            Scanner reader = new Scanner(new File(String.valueOf(file1)));
+            reader.useDelimiter(",|\n");
+            List<String> lines = Files.readAllLines(Path.of(String.valueOf(file2)));
+
+            System.out.println("Populating objects with data from person file...");
+
+            while (reader.hasNext()) {
+                Person person = new Person();
+
+                person.setFirstName(reader.next());
+                String firstName = person.firstName;
+                person.setLastName(reader.next());
+                String lastName = person.lastName;
+                person.setTelephone(reader.next());
+                person.setEmail(reader.next());
+                person.setCommunity(reader.next());
+                person.setSchool(reader.next());
+                person.setEmployer(reader.next());
+                person.setPrivacy(reader.next().charAt(0));
+
+                String activityForObj = "";
+                for (String line : lines) {
+                    if (line.contains(firstName) && line.contains(lastName)) {
+                        String[] activityFromFile = line.split(",");
+                        activityForObj = activityForObj + activityFromFile[2] +  "\n";
+                        person.setActivity(activityForObj);
+                    }
+                }
+
+                personList.add(person);
+
+                if(!reader.hasNextLine())
+                {
+                    break;
+                }
+            }
+
+            System.out.println("List has been populated.");
+            reader.close();
+
+        } catch (FileNotFoundException ex) {
+            ex.printStackTrace();
+        }
+    }
 }
