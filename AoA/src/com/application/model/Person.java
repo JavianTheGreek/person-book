@@ -145,8 +145,8 @@ public class Person {
 
     public static void readFromFiles(ArrayList<Person> personList) throws IOException {
         try {
-            String file1 = "../person-book-main/AoA/SamplefilePersons2022Oct31text.csv";
-            String file2 = "../person-book-main/AoA/SamplefileActivities2022Oct31text.csv";
+            String file1 = "SamplefilePersons2022Oct31text.csv";
+            String file2 = "SamplefileActivities2022Oct31text.csv";
             Scanner reader = new Scanner(new File(file1));
             reader.useDelimiter(",|\n");
             List<String> lines = Files.readAllLines(Path.of(file2));
