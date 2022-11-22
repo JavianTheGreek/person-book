@@ -117,7 +117,7 @@ public class PersonTree {
         inorderTraversal(root);
     }
 
-    private void inorderTraversal(Node root) {
+    public void inorderTraversal(Node root) {
         if (root != null) {
             inorderTraversal(root.getLeftSubTree());
             System.out.print(root.getRoot());

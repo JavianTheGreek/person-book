@@ -192,7 +192,7 @@ public class Person {
         }
     }
 
-    public static void userCreateFile(){
+    public static void userCreateFile(ArrayList<Person> personArrayList) throws IOException {
         Scanner input = new Scanner(System.in);
         System.out.print("Enter the filename you want to use for Person File.: ");
         String fileName = input.nextLine();
@@ -202,11 +202,13 @@ public class Person {
         String fileName2 = input.nextLine();
         fileName2 = fileName2 + ".csv";
 
-        boolean isFileCreated1 = false;  // set isFileCreated to false.
-        boolean isFileCreated2 = false;  // set isFileCreated to false.
+        boolean isFileCreated1 = false;  // set isFileCreated1 to false.
+        boolean isFileCreated2 = false;  // set isFileCreated2 to false.
+
         try {
             File file = new File(fileName);
             File file2 = new File(fileName2);
+
             isFileCreated1 = file.createNewFile();
             isFileCreated2 = file2.createNewFile();
 
@@ -228,14 +230,15 @@ public class Person {
         System.out.println(fileLocator);
         System.out.println(fileLocator2);
 
+        readFromSelectedFiles(personArrayList, fileName, fileName2);
 
     }
 
-    public static void readFromSelectedFiles(ArrayList<Person> personList, File file1, File file2) throws IOException {
+    public static void readFromSelectedFiles(ArrayList<Person> personList, String file1, String file2) throws IOException {
         try {
-            Scanner reader = new Scanner(new File(String.valueOf(file1)));
+            Scanner reader = new Scanner(new File(file1));
             reader.useDelimiter(",|\n");
-            List<String> lines = Files.readAllLines(Path.of(String.valueOf(file2)));
+            List<String> lines = Files.readAllLines(Path.of(file2));
 
             System.out.println("Populating objects with data from person file...");
 
