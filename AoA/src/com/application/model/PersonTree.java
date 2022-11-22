@@ -15,10 +15,6 @@ import java.util.ArrayList;
 import java.util.Stack;
 
 public class PersonTree {
-
-    static int d1 = -1;
-    static int d2 = -1;
-    static int dist = 0;
     private Node root;
 
     public PersonTree() {
@@ -220,6 +216,10 @@ public class PersonTree {
     // lvl -. Level (or distance from root) of current node
     // dist -. To store distance between n1 and n2
 
+    static int d1 = -1;
+    static int d2 = -1;
+    static int dist = 0;
+
     // Returns height of person P if they are in the tree
     public static int findHeight(Node node, Person P, int height) {
         if (node == null) {
@@ -232,6 +232,7 @@ public class PersonTree {
         }
 
         int h = findHeight(node.getLeftSubTree(), P, height + 1);
+        // h not 1 -> 1 else ->
         return (h != -1) ? h : findHeight(node.getRightSubTree(), P, height + 1);
     }
 

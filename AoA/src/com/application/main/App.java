@@ -74,15 +74,11 @@ public class App {
     public static void degreeOfSeparation(ArrayList<Person> personList, PersonTree personTree) throws IOException {
         int size = personList.size();
         int min = 0;
-        int max = personList.size() - 1;
+        int max = personList.size() - 1; // 0 -> 19999
         int getPosition1 = (int) (Math.random() * (max - min + 1) + min);
         int getPosition2 = (int) (Math.random() * (max - min + 1) + min);
 
         String input = "";
-        String FirstName1 = "";
-        String LastName1 = "";
-        String FirstName2 = "";
-        String LastName2 = "";
 
         try {
             System.out.println("\nEnter any key to continue (exit to end the program)");
@@ -94,52 +90,21 @@ public class App {
                 System.out.println(getPosition2 + ": " + personList.get(getPosition2).getFirstName() + " "
                         + personList.get(getPosition2).getLastName());
 
-                System.out.println("\n\t-+-Enter Names of the Persons in the file-+-");
-                System.out.println("Enter First Person's Name: ");
-                FirstName1 = in.next();
-                LastName1 = in.next();
-                System.out.println("Enter Second Person's Name: ");
-                FirstName2 = in.next();
-                LastName2 = in.next();
 
                 Person P1 = personList.get(getPosition1);
                 Person P2 = personList.get(getPosition2);
 
+
                 System.out.println("Degree of separation between " + P1.getFirstName() + " " + P1.getLastName() +
-                        " and " + P2.getFirstName() + " " + P2.getLastName() + " is: " + findDistance(personTree.getRoot(), P1, P2));
-
-                         /*
-
-                for(int i=0; i<20000-1; i++) { //sequentially compare everyone in the list
-                    for(int j=i+1; j<20000; j++){ // Using the index of each person
-                        int degree = personTree.findDistance(personTree.getRoot(), i, j);
-                        total += degree; //add the degree of separation values to the total
-                    }
-                }
-                avgDOS = (total)/(arr.size()*(arr.size()-1));
-
-            */
+                        " and " + P2.getFirstName() + " " + P2.getLastName() + " is: " + personTree.findDistance(personTree.getRoot(), P1, P2));
 
             } else {
                 menu();
             }
         } catch (Exception e) {
-            e.printStackTrace();
+            System.out.println("Invalid ->" + e.getMessage());
         }
     }
-
-    /*public static double getAverageDOS(ArrayList<Person> newArrList){
-        double total = 0;
-
-        for(int i=0; i<newArrList.size()-1; i++) { //sequentially compare everyone in the list
-            for(int j=i+1; j<newArrList.size(); j++){ // Using the index of each person
-                int degree = DegSeparation();
-                total += degree; //add the degree of separation values to the total
-            }
-        }
-        return (total)/(arr.size()*(arr.size()-1));
-
-    }*/
 
     public static void avgDegreeOfSeparation(ArrayList<Person> personList, PersonTree personTree) throws IOException {
         int n = 0;
