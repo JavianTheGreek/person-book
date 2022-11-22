@@ -1,3 +1,10 @@
+/*
+* Name:  ID#:
+* Name: Javian Cummings ID#: 2001946
+* Name:  ID#:
+* Name:Sydney Chambers  ID#: 2005734
+* */
+
 package com.application.main;
 
 import com.application.model.Person;
@@ -20,88 +27,45 @@ public class App {
     static int choice = 0;
 
     public static void main(String[] args) throws IOException {
-//        Menu();
-        //Display menu option to user.
+
+        System.out.println("Upload Persons and Activities files: \n");
+        Person.userCreateFile(personList);
+        createTree(personList, personTree);
 
         menu();
 
-        //Populating ArrayList with records from person and activities files
-//        Person.readFromFiles(personList);
-
         size = personList.size(); // pass the size of the personList to the global attribute
-        System.out.println("Size of list = " + size);//Displays the size of the personList
-
-        System.out.println("\nChecking if tree is empty...");
-        System.out.print(personTree.isEmpty() + "\n");//Check to see if Binary tree is empty, if empty returns a boolean of true else return false
-
-
-        //Populating tree with person records
-        System.out.println("\nPopulating tree with data from personList...");
-        for (Person person : personList) {
-            personTree.insertNode(person);
-        }
-        System.out.println("Tree populated.");
-
-
-        System.out.println("\nConfirming that tree is no longer empty...");
-        System.out.print(personTree.isEmpty() + "\n");//Check to see if Binary tree is empty, if empty returns a boolean of true else return false
-
-
-        //Checking number of nodes in tree
-        System.out.println("\nNumber of nodes in tree: " + personTree.getTotalNumberOfNodes(personTree.getRoot()) + "\n");
-
-        //Conducting a search for a given node in the tree
-//        System.out.println("\nSearching tree for '" + personList.get().getFirstName() + " " + personList.get(9483).getLastName() + "'...");
-//        personTree.searchData(personList.get(9483));
-
-
-        System.out.print("The degree of separation is " + findDistance(personTree.getRoot(), personList.get(8999), personList.get(17800)));
-
-        //Recommending to each person the activities of their close contact
-//        for(int i=0; i < size; i++){
-//            System.out.println("\nMaking recommendations to " + personList.get(i).getFirstName() + " " + personList.get(i).getLastName());
-//            personTree.getRec(personList.get(i));
-//        }
-
-
     }
 
     public static void menu() throws IOException {
-        while (choice != 5) {
+        while (choice != 4) {
             System.out.println("""
 
                     +++ PersonBook +++
 
-                    [1] - Upload Files
-                    [2] - Calculate Degree of Separation
-                    [3] - Average of Degree of Separation
-                    [4] - Recommendations
-                    [5] - Exit
+                    [1] - Calculate Degree of Separation
+                    [2] - Average of Degree of Separation
+                    [3] - Recommendations
+                    [4] - Exit
 
                     """);
             System.out.println("Select from above");
             choice = in.nextInt();//takes the users entered value and pass it to the switch statement.
             switch (choice) {
                 case 1 -> {
-//                    Person.userCreateFile(personList);
-                    Person.readFromFiles(personList);
-                    createTree(personList, personTree);
-                    break;
-                }
-                case 2 -> {
                     degreeOfSeparation(personList, personTree);
                     break;
                 }
-                case 3 -> {
+                case 2 -> {
                     //getAverageDOS();
                     System.out.println("Calculating of Average Degree of Separation in Process...");
-                   // System.out.println(getAverage(personList)); // pass the list to the new array list
+                    // System.out.println(getAverage(personList)); // pass the list to the new array list
                     break;
                 }
-                case 4 -> {
+                case 3 -> {
                     makeRecommendations(personTree, personList);
                 }
-                case 5 -> {
+                case 4 -> {
                     System.exit(0);
                 }
             }
@@ -144,10 +108,10 @@ public class App {
                 Person P1 = personList.get(getPosition1);
                 Person P2 = personList.get(getPosition2);
 
-                System.out.println("Distance between " + P1.getFirstName() + " " + P1.getLastName() +
+                System.out.println("Degree of separation between " + P1.getFirstName() + " " + P1.getLastName() +
                         " and " + P2.getFirstName() + " " + P2.getLastName() + " is: " + personTree.findDistance(personTree.getRoot(), P1, P2));
 
-            }else{
+            } else {
                 menu();
             }
         } catch (Exception e) {
@@ -155,6 +119,18 @@ public class App {
         }
     }
 
+    /*public static double getAverageDOS(ArrayList<Person> newArrList){
+        double total = 0;
+
+        for(int i=0; i<newArrList.size()-1; i++) { //sequentially compare everyone in the list
+            for(int j=i+1; j<newArrList.size(); j++){ // Using the index of each person
+                int degree = DegSeparation();
+                total += degree; //add the degree of separation values to the total
+            }
+        }
+        return (total)/(arr.size()*(arr.size()-1));
+
+    }*/
 
 
     //Recommending to each person the activities of their close contact
@@ -179,7 +155,7 @@ public class App {
         System.out.println("Tree populated.");
 
         //Checking number of nodes in tree
-        System.out.println("\nNumber of nodes in tree: " + personTree.getTotalNumberOfNodes(personTree.getRoot()) + "\n");
+        System.out.println("Number of nodes in tree: " + personTree.getTotalNumberOfNodes(personTree.getRoot()) + "\n");
 
         return personTree;
     }

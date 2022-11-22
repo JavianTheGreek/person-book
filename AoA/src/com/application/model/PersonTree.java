@@ -1,3 +1,11 @@
+/*
+ * Name:  ID#:
+ * Name: Javian Cummings ID#: 2001946
+ * Name:  ID#:
+ * Name:Sydney Chambers  ID#: 2005734
+ * */
+
+
 package com.application.model;
 
 import com.application.main.Node;

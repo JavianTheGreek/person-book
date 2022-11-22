@@ -1,3 +1,10 @@
+/*
+ * Name:  ID#:
+ * Name: Javian Cummings ID#: 2001946
+ * Name:  ID#:
+ * Name:Sydney Chambers  ID#:2005734
+ * */
+
 package com.application.model;
 
 import java.io.*;
@@ -185,6 +192,7 @@ public class Person {
             }
 
             System.out.println("List has been populated.");
+            System.out.println("Size of list = " + personList.size());//Displays the size of the personList
             reader.close();
 
         } catch (FileNotFoundException ex) {
@@ -222,10 +230,7 @@ public class Person {
         } catch (NullPointerException ex){
             ex.printStackTrace();
         }
-        System.out.print("Was the file managed to make? -- ");
-        System.out.println(isFileCreated1);
-        System.out.println(isFileCreated2);
-        String fileLocator = "fileLocator -> " + fileName;
+        String fileLocator = "\nfileLocator -> " + fileName;
         String fileLocator2 = "fileLocator -> " + fileName2;
         System.out.println(fileLocator);
         System.out.println(fileLocator2);
