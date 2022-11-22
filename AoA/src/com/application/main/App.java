@@ -1,7 +1,7 @@
 /*
-* Name:  ID#:
+* Name: Castin Rowe ID#:
 * Name: Javian Cummings ID#: 2001946
-* Name:  ID#:
+* Name:  Jazmin Hayles ID#: 2006754
 * Name:Sydney Chambers  ID#: 2005734
 * */
 
@@ -43,9 +43,9 @@ public class App {
 
                     +++ PersonBook +++
 
-                    [1] - Calculate Degree of Separation
-                    [2] - Average of Degree of Separation
-                    [3] - Recommendations
+                    [1] - Recommendations
+                    [2] - Calculate Degree of Separation
+                    [3] - Average of Degree of Separation
                     [4] - Exit
 
                     """);
@@ -53,17 +53,14 @@ public class App {
             choice = in.nextInt();//takes the users entered value and pass it to the switch statement.
             switch (choice) {
                 case 1 -> {
-                    degreeOfSeparation(personList, personTree);
-                    break;
+                    makeRecommendations(personTree, personList);
                 }
                 case 2 -> {
-                    //getAverageDOS();
-                    System.out.println("Calculating of Average Degree of Separation in Process...");
-                    // System.out.println(getAverage(personList)); // pass the list to the new array list
-                    break;
+                    degreeOfSeparation(personList, personTree);
                 }
                 case 3 -> {
-                    makeRecommendations(personTree, personList);
+                    System.out.println("Calculating of Average Degree of Separation in Process...");
+                    avgDegreeOfSeparation(personList, personTree);
                 }
                 case 4 -> {
                     System.exit(0);
@@ -109,7 +106,19 @@ public class App {
                 Person P2 = personList.get(getPosition2);
 
                 System.out.println("Degree of separation between " + P1.getFirstName() + " " + P1.getLastName() +
-                        " and " + P2.getFirstName() + " " + P2.getLastName() + " is: " + personTree.findDistance(personTree.getRoot(), P1, P2));
+                        " and " + P2.getFirstName() + " " + P2.getLastName() + " is: " + findDistance(personTree.getRoot(), P1, P2));
+
+                         /*
+
+                for(int i=0; i<20000-1; i++) { //sequentially compare everyone in the list
+                    for(int j=i+1; j<20000; j++){ // Using the index of each person
+                        int degree = personTree.findDistance(personTree.getRoot(), i, j);
+                        total += degree; //add the degree of separation values to the total
+                    }
+                }
+                avgDOS = (total)/(arr.size()*(arr.size()-1));
+
+            */
 
             } else {
                 menu();
@@ -131,6 +140,49 @@ public class App {
         return (total)/(arr.size()*(arr.size()-1));
 
     }*/
+
+    public static void avgDegreeOfSeparation(ArrayList<Person> personList, PersonTree personTree) throws IOException {
+        int n = 0;
+        int min = 0;
+        int max = personList.size() - 1;
+
+
+
+        String input = "";
+
+        try {
+            System.out.println("\nEnter any key to continue (exit to end the program)");
+            input = in.next();
+            if (!input.equals("exit")) {
+
+
+                int degree, count = 0;
+                do {
+                    int getPosition1 = (int) (Math.random() * (max - min + 1) + min);
+                    int getPosition2 = (int) (Math.random() * (max - min + 1) + min);
+                    //System.out.println("\nSelecting Random persons from the list...");
+                    //System.out.println(getPosition1 + ": " + personList.get(getPosition1).getFirstName() + " " + personList.get(getPosition1).getLastName());
+                    //System.out.println(getPosition2 + ": " + personList.get(getPosition2).getFirstName() + " " + personList.get(getPosition2).getLastName());
+
+
+
+                    Person P1 = personList.get(getPosition1);
+                    Person P2 = personList.get(getPosition2);
+                    //System.out.println("Degree of separation between " + P1.getFirstName() + " " + P1.getLastName() + " and " + P2.getFirstName() + " " + P2.getLastName() + " is: " + personTree.findDistance(personTree.getRoot(), P1, P2));
+                    degree = personTree.findDistance(personTree.getRoot(), P1, P2);
+                    count = count + degree;
+                    n++;
+                } while (n < 20000);
+                int Avg = count / (20000/2); // Divided by 2 because we are comparing 2 persons in the list
+                System.out.println("Avg Degree of separation of 20000 random persons in the list is " + Avg);
+            } else {
+                menu();
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
 
 
     //Recommending to each person the activities of their close contact

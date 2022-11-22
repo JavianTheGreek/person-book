@@ -1,7 +1,7 @@
 /*
- * Name:  ID#:
+ * Name: Castin Rowe  ID#:
  * Name: Javian Cummings ID#: 2001946
- * Name:  ID#:
+ * Name:  Jazmin Hayles ID#: 2006754
  * Name:Sydney Chambers  ID#:2005734
  * */
 
@@ -245,7 +245,7 @@ public class Person {
             reader.useDelimiter(",|\n");
             List<String> lines = Files.readAllLines(Path.of(file2));
 
-            System.out.println("Populating objects with data from person file...");
+            System.out.println("Populating objects with data from person and Activity file...");
 
             while (reader.hasNext()) {
                 Person person = new Person();
