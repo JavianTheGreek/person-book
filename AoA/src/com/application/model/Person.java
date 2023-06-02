@@ -1,9 +1,3 @@
-/*
- * Name: Castin Rowe  ID#:
- * Name: Javian Cummings ID#: 2001946
- * Name:  Jazmin Hayles ID#: 2006754
- * Name:Sydney Chambers  ID#:2005734
- * */
 
 package com.application.model;
 
